@@ -13,7 +13,7 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState({
-    z: 0, o: 0, t: 0, th: 0, f: 0, fi: 0, s: 0
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0
   })
 
   const randomNum = (max) => {
@@ -21,74 +21,19 @@ const App = () => {
   }
 
   const handleClickChange = () => setSelected(randomNum(7))
-
-  const getTotalCount = () => {
-    if(selected === 0 ){
-      return votes.z
-    } else if(selected === 1){
-      return votes.o
-    } else if(selected === 2){
-      return votes.t
-    } else if(selected === 3){
-      return votes.th
-    } else if(selected === 4){
-      return votes.f
-    } else if(selected === 5){
-      return votes.fi
-    } else if(selected === 6){
-      return votes.s
-    } else {
-      return 0
-    }
-  }
-
-  const totalCount = getTotalCount()
-
   const handleClickVote = () => {
-        if(selected === 0 ){
-          const newVotes = {
-          ...votes,
-          z : votes.z + 1
-        }
-          setVotes(newVotes)
-        } else if(selected === 1){
-          const newVotes = {
-          ...votes,
-          o : votes.o + 1
-        }
-          setVotes(newVotes)
-        } else if(selected === 2){
-          const newVotes = {
-          ...votes,
-          t : votes.t + 1
-        }
-          setVotes(newVotes)
-        }else if(selected === 3){
-          const newVotes = {
-          ...votes,
-          th : votes.th + 1
-        }
-          setVotes(newVotes)
-        }else if(selected === 4){
-          const newVotes = {
-          ...votes,
-          f : votes.f + 1
-        }
-          setVotes(newVotes)
-        }else if(selected === 5){
-          const newVotes = {
-          ...votes,
-          fi : votes.fi + 1
-        }
-          setVotes(newVotes)
-        }else if(selected===6){
-          const newVotes = {
-          ...votes,
-          s : votes.s + 1
-        }
-          setVotes(newVotes)
-        }
+    const newVotes = {
+      ...votes,
+      [selected] : votes[selected] + 1
+    }
+    setVotes(newVotes)
   }
+
+
+
+  const totalCount = votes[selected]
+
+
 
   return (
     <div>

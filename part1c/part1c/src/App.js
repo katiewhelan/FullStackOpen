@@ -11,11 +11,18 @@ const Statistics = (props) => {
 
     if(props.click === 0) {
       return (
-        <div>No data </div>
+        <tr>
+          <td>No </td>
+          <td> Data </td>
+        </tr>
       )
     }
       return (
-        <div> {props.name} {props.val} </div>
+        <tr>
+          <td> {props.name} </td>
+          <td> {props.val} </td>
+        </tr>
+
       )
 }
 
@@ -60,12 +67,23 @@ const handleClickBad = () => {
       <Button handleClick={() => handleClickNeutral()} text="Neutral" />
       <Button handleClick={() => handleClickBad()} text="Bad" />
       <h1> Statistics </h1>
+      <table>
+      <thead>
+      <tr>
+         <th>Rating</th>
+         <th>Value</th>
+
+       </tr>
+       </thead>
+       <tbody>
       <Statistics name="Good" val={stats.good} click={stats.click}/>
       <Statistics name="Neutral" val={stats.neutral} click={stats.click}/>
       <Statistics name="Bad" val={stats.bad} click={stats.click}/>
       <Statistics name="All" val={stats.all} click={stats.click}/>
       <Statistics name="Average" val={(stats.good-stats.bad)/stats.all} click={stats.click}/>
       <Statistics name="Posative" val={(stats.good/stats.all)*100} click={stats.click}/>
+      </tbody>
+      </table>
     </div>
   )
 }

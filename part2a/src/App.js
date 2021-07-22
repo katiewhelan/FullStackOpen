@@ -3,18 +3,9 @@ import React, { useState } from 'react'
 const Course = (props) => {
   const {course} = props
 
-  const getCourseCount = () => {
-    let total = 0
-    course.parts.forEach((item) => {
-      console.log(item)
-      total += item.exercises
-    });
-
-    return total
-
-  }
-
-  const count = getCourseCount()
+  const count = course.parts.reduce(function(sum,part){
+    return sum + part.exercises
+  },0)
 
   return (
   <div>

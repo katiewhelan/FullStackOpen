@@ -3,6 +3,18 @@ import React, { useState } from 'react'
 const Course = (props) => {
   const {course} = props
 
+  const getCourseCount = () => {
+    let total = 0
+    course.parts.forEach((item) => {
+      console.log(item)
+      total += item.exercises
+    });
+
+    return total
+
+  }
+
+  const count = getCourseCount()
 
   return (
   <div>
@@ -12,10 +24,11 @@ const Course = (props) => {
     <ul>
       {course.parts.map(part =>
         <li key={part.id}>
-          {part.name}
+          {part.name} {part.exercises}
         </li>
     )}
     </ul>
+    <div>Total courses {count}</div>
   </div>
 )
 

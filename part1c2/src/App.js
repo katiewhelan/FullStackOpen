@@ -29,14 +29,25 @@ const App = () => {
     setVotes(newVotes)
   }
 
+  const checkMostVotes = () => {
+    let quote = 0
+    let val = 0
+    const array = Object.keys(votes).map(k => [k,votes[k]])
+    array.forEach((v, i) => {
+      if(v[1] >= val){
+        val = v[1]
+        quote = v[0]
+      }
+    });
+    return quote
+  }
 
-
+  const quoateMostVotes = checkMostVotes()
   const totalCount = votes[selected]
-
-
 
   return (
     <div>
+    <h1>Quote of the Day </h1>
       <div>{anecdotes[selected]}</div>
         <div>
           <button onClick={handleClickChange}>New</button>
@@ -45,6 +56,8 @@ const App = () => {
         <div>
           <button onClick={handleClickVote}>Vote</button>
         </div>
+        <h1>Quote with most votes</h1>
+          <div>{anecdotes[quoateMostVotes]}</div>
     </div>
   )
 }

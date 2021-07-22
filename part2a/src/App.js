@@ -3,9 +3,7 @@ import React, { useState } from 'react'
 const Course = (props) => {
   const {course} = props
 
-  const count = course.parts.reduce(function(sum,part){
-    return sum + part.exercises
-  },0)
+  const count = course.parts.reduce((sum,part) => sum + part.exercises,0)
 
   return (
   <div>

@@ -1,25 +1,5 @@
 import React, { useState } from 'react'
-
-const Course = (props) => {
-  const {course} = props
-
-  const count = course.parts.reduce((sum,part) => sum + part.exercises,0)
-
-  return (
-  <div>
-    <h1>{course.name}</h1>
-    <ul>
-      {course.parts.map(part =>
-        <li key={part.id}>
-          {part.name} {part.exercises}
-        </li>
-    )}
-    </ul>
-    <div>Total courses {count}</div>
-  </div>
-)
-
-}
+import Course from './Course.js'
 const App = () => {
   const courses = [
     {

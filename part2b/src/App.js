@@ -6,6 +6,10 @@ const Number = ({person}) => {
   )
 }
 
+const isEqual = (first, second) => {
+    return JSON.stringify(first) === JSON.stringify(second);
+}
+
 const App = () => {
   const [ persons, setPersons ] = useState([
     { name: 'Arto Hellas' }
@@ -14,16 +18,21 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
-    console.log('add button was clicked', event.target)
     const personObject = {
       name : newName
     }
+    checkForSameName(personObject)
+  }
 
-    //copy persons
-    //create person
+  const checkForSameName = (pO) => {
+    const resultIsEqual = persons.some(p => isEqual(p,pO));
+    if (resultIsEqual){
+      alert(`${newName} has already been added to the phonebook`)
+    } else {
+      setPersons(persons.concat(pO))
+      setNewName('')
+    }
 
-    setPersons(persons.concat(personObject))
-    setNewName('')
   }
 
   const handleNameChange = (event) => {

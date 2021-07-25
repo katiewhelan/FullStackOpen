@@ -21,7 +21,7 @@ const App = () => {
 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-  const [ searchList, setSearchList ] = useState('')
+  const [ searchList, setSearchList ] = useState(persons)
   const [ searchTerm, setSearchTerm] = useState('')
 
   const isEqual = (first, second) => {

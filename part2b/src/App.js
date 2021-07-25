@@ -9,16 +9,24 @@ const Number = ({person}) => {
   )
 }
 
-const isEqual = (first, second) => {
-    return JSON.stringify(first) === JSON.stringify(second);
-}
+
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', number: 1231231234 }
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
+
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
+  const [ searchList, setSearchList ] = useState('')
+  const [ searchTerm, setSearchTerm] = useState('')
+
+  const isEqual = (first, second) => {
+      return JSON.stringify(first) === JSON.stringify(second);
+  }
 
   const addName = (event) => {
     event.preventDefault()
@@ -42,16 +50,28 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log('Handle Change', event.target.value)
+
     setNewName(event.target.value)
   }
   const handleNumberChange = (event) => {
-    console.log('Handle Number Change', event.target.value)
+
     setNewNumber(event.target.value)
   }
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value)
+    setSearchList(persons.filter(person => person.name.toLowerCase().includes(event.target.value)))
+    console.log('The final list ',searchList, searchTerm)
+  }
+
 
   return (
     <div>
+    <h2>Search</h2>
+    <div>
+    <input value={searchTerm}
+      onChange={handleSearchChange}
+      />
+      </div>
       <h2>Phonebook</h2>
       <form onSubmit={addName}>
         <div>
@@ -73,8 +93,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-
-        {persons.map(person =>
+        {searchList.map(person =>
           <Number key={person.name} person={person}/>
         )}
     </div>

@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
   const Filter = (props) => {
-
-
   return(
   <div>
   <input value={props.searchTerm}
-    onChange={()=>props.handleSearchChange}
+    onChange={props.handleSearchChange}
     />
     </div>
   )

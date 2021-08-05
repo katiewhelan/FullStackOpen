@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Person from './Person.js'
 import PersonForm from './Form.js'
 import Filter from './Filter'
+import DisplayList from './DisplayList'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -14,7 +15,6 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ searchList, setSearchList ] = useState(persons)
-  const [ searchTerm, setSearchTerm] = useState('')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -25,7 +25,7 @@ const App = () => {
     setNewNumber(event.target.value)
     console.log('name change', newNumber , event.target.value)
   }
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
     console.log('AddName Called', event)
     const personObject = {
@@ -40,31 +40,35 @@ const App = () => {
   }
 
   const checkForSameName = (pO) => {
+    console.log('check same called', pO)
     const resultIsEqual = persons.some(p => isEqual(p,pO));
     if (resultIsEqual){
+      console.log('is equal')
       alert(`${newName} has already been added to the phonebook`)
     } else {
+        console.log('is not equal', persons, pO)
       setPersons(persons.concat(pO))
+      console.log('update', persons)
+      console.log('Name and number', newName, newNumber)
       setNewName('')
+      console.log('new name',newName)
       setNewNumber('')
+      console.log('new number', newNumber)
+      setSearchList(persons)
     }
   }
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value)
     setSearchList(persons.filter(person => person.name.toLowerCase().includes(event.target.value)))
-    console.log('The final list ',searchList, searchTerm)
   }
   return (
     <div>
       <h2>Search</h2>
-    <Filter />
+    <Filter handleSearchChange = {handleSearchChange} />
       <h2>Phonebook</h2>
-
+      <PersonForm onSubmit={addPerson} newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange = {handleNumberChange}/>
       <h2>Numbers</h2>
-        {searchList.map(person =>
-          <Person key={person.name} person={person}/>
-        )}
+        <DisplayList persons={persons}/>
     </div>
   )
 }

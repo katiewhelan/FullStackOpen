@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import Person from './Person.js'
-import PersonForm from './Form.js'
-import Filter from './Filter'
-import DisplayList from './DisplayList'
+import PersonForm from './Components/Form.js'
+import Filter from './Components/Filter'
+import DisplayList from './Components/DisplayList'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -18,14 +17,15 @@ const App = () => {
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
-    console.log('name change', newName , event.target.value)
+
   }
 
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
-    console.log('name change', newNumber , event.target.value)
+
   }
   const addPerson = (event) => {
+    console.log("YOU ARE HERE")
     event.preventDefault()
     console.log('AddName Called', event)
     const personObject = {
@@ -46,15 +46,10 @@ const App = () => {
       console.log('is equal')
       alert(`${newName} has already been added to the phonebook`)
     } else {
-        console.log('is not equal', persons, pO)
       setPersons(persons.concat(pO))
-      console.log('update', persons)
-      console.log('Name and number', newName, newNumber)
       setNewName('')
-      console.log('new name',newName)
       setNewNumber('')
-      console.log('new number', newNumber)
-      setSearchList(persons)
+      setSearchList(persons.concat(pO))
     }
   }
 
@@ -68,7 +63,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <PersonForm onSubmit={addPerson} newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange = {handleNumberChange}/>
       <h2>Numbers</h2>
-        <DisplayList persons={persons}/>
+        <DisplayList persons={searchList}/>
     </div>
   )
 }

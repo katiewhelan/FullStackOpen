@@ -2,10 +2,9 @@ import React from 'react'
 
 const Person = ({person}) => {
   return (
-    <div>
-    <div>Name: {person.name}</div>
-    <div> Number:{person.number}</div>
-    </div>
+
+    <li>Name: {person.name} Number: {person.number}</li>
+    
   )
 }
 

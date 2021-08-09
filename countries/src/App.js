@@ -2,22 +2,40 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 const App = () => {
   const [searchString, setSearchString] = useState('')
-  const [searchCount, setSearchCount] = useState(0)
+
   const [showResults, setShowResults] = useState(false)
   const [searchResults, setSearchResults] = useState([])
 
   const handleSearchChange = (event) => {
     setSearchString(event.target.value)
-    setSearchCount(searchCount + 1)
   }
 
 const Results = ({searchResults}) => {
-  return(
-<div>
-{searchResults.map(item => <div key={item.name}> {item.name} </div>)}
-</div>
-  )
-}
+  if(searchResults.length === 1) {
+    return(
+      <div>
+        {searchResults.map(item =>
+          <div key={item.alpha2Code}>
+          <h1>{item.name}</h1>
+          <div>Capital: {item.capital}</div>
+          <div>Population: {item.population}</div>
+          <h2>Languages</h2>
+          {item.languages.map(lang =>
+            <li key={lang.iso639_1}>{lang.name}</li> )}
+            <img src={item.flag} alt='Flag' width="200" height="75"/>
+          </div>
+        )}
+      </div>
+    )
+  } else {
+      return(
+        <div>
+          {searchResults.map(item => <div key={item.name}> {item.name} </div>)}
+        </div>
+      )
+    }
+  }
+
 
   useEffect(() => {
     if(searchString.length > 0) {
@@ -33,7 +51,7 @@ const Results = ({searchResults}) => {
         }
       })
     }
-  },[searchCount])
+  },[searchString])
   return (
     <div>
       <div>

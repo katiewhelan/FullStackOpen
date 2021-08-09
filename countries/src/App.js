@@ -10,12 +10,10 @@ const App = () => {
     setSearchString(event.target.value)
   }
 
-const Results = ({searchResults}) => {
-  if(searchResults.length === 1) {
+  const SingleResult = ({item}) => {
+    console.log('item', item , {item})
     return(
-      <div>
-        {searchResults.map(item =>
-          <div key={item.alpha2Code}>
+          <div>
           <h1>{item.name}</h1>
           <div>Capital: {item.capital}</div>
           <div>Population: {item.population}</div>
@@ -24,18 +22,33 @@ const Results = ({searchResults}) => {
             <li key={lang.iso639_1}>{lang.name}</li> )}
             <img src={item.flag} alt='Flag' width="200" height="75"/>
           </div>
-        )}
-      </div>
+    )
+  }
+  const handleShowDetails = (item) => {
+
+    console.log('Hello button click', item)
+    setSearchResults([item])
+  }
+
+const Results = ({searchResults}) => {
+
+  if(searchResults.length === 1) {
+    console.log('hello', searchResults[0])
+
+    return (
+      <SingleResult item = {searchResults[0]} />
     )
   } else {
       return(
         <div>
-          {searchResults.map(item => <div key={item.name}> {item.name} </div>)}
+          {searchResults.map(item =>
+            <div key={item.name}> {item.name}
+            <button value = {item} onClick={() => handleShowDetails(item)}>Show Details</button>
+            </div>)}
         </div>
       )
     }
   }
-
 
   useEffect(() => {
     if(searchString.length > 0) {

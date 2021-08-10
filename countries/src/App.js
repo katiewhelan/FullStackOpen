@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import Country from './Components/Country.js'
 const App = () => {
   const [searchString, setSearchString] = useState('')
-
   const [showResults, setShowResults] = useState(false)
   const [searchResults, setSearchResults] = useState([])
 
@@ -10,33 +10,16 @@ const App = () => {
     setSearchString(event.target.value)
   }
 
-  const SingleResult = ({item}) => {
-    console.log('item', item , {item})
-    return(
-          <div>
-          <h1>{item.name}</h1>
-          <div>Capital: {item.capital}</div>
-          <div>Population: {item.population}</div>
-          <h2>Languages</h2>
-          {item.languages.map(lang =>
-            <li key={lang.iso639_1}>{lang.name}</li> )}
-            <img src={item.flag} alt='Flag' width="200" height="75"/>
-          </div>
-    )
-  }
   const handleShowDetails = (item) => {
-
-    console.log('Hello button click', item)
     setSearchResults([item])
   }
 
 const Results = ({searchResults}) => {
+  console.log('results',searchResults[0])
 
   if(searchResults.length === 1) {
-    console.log('hello', searchResults[0])
-
     return (
-      <SingleResult item = {searchResults[0]} />
+      <Country country = {searchResults[0]} />
     )
   } else {
       return(
@@ -60,7 +43,6 @@ const Results = ({searchResults}) => {
         } else {
           setShowResults(true)
           setSearchResults(response.data)
-          console.log('DATA', response.data)
         }
       })
     }

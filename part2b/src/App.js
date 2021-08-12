@@ -3,6 +3,8 @@ import axios from 'axios'
 import PersonForm from './Components/Form.js'
 import Filter from './Components/Filter'
 import DisplayList from './Components/DisplayList'
+import personService from './Services/Persons'
+
 
 const App = () => {
   const [ persons, setPersons ] = useState([])
@@ -12,12 +14,11 @@ const App = () => {
 
   useEffect(() => {
     console.log("Effect")
-    axios
-    .get('http://localhost:3001/persons')
+    personService
+    .getAll()
     .then(response => {
       console.log("Promise fulfilled", response.data)
       setPersons(response.data)
-      console.log('after set persons ',persons)
       setSearchList(response.data)
     })
   }, [])
@@ -53,8 +54,8 @@ const App = () => {
       setNewNumber('')
       setSearchList(persons.concat(pO))
 
-      axios
-      .post('http://localhost:3001/persons', pO)
+      personService
+      .create(pO)
       .then(response => {
         console.log('Here is the response', response)
       })

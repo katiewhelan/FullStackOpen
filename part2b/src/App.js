@@ -52,6 +52,13 @@ const App = () => {
       setNewName('')
       setNewNumber('')
       setSearchList(persons.concat(pO))
+
+      axios
+      .post('http://localhost:3001/persons', pO)
+      .then(response => {
+        console.log('Here is the response', response)
+      })
+
     }
   }
 

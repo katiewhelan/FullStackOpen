@@ -21,29 +21,9 @@
       "id": 4
     },
     {
-      "name": "katie ",
-      "number": "123123123",
-      "id": 5
-    },
-    {
-      "name": "Deanna ",
-      "number": "123123123",
+      "name": "Deanna",
+      "number": "123123",
       "id": 6
-    },
-    {
-      "name": "Matt",
-      "number": "123123",
-      "id": 7
-    },
-    {
-      "name": "Julie",
-      "number": "123123",
-      "id": 8
-    },
-    {
-      "name": "Mike",
-      "number": "123123",
-      "id": 9
     }
   ]
 }

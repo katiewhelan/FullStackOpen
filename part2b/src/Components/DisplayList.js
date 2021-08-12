@@ -1,13 +1,15 @@
 import React from 'react'
 import Person from './Person.js'
 
-const DisplayList = (props) => {
 
-const searchList = props.persons
+const DisplayList = ({persons, deletePerson}) => {
+   console.log('Display Lists', persons)
+
+
 
   return (
-    <div>{searchList.map(person =>
-      <Person key={person.name} person={person}/>
+    <div>{persons.map(person =>
+      <Person key={person.name} person={person} deletePerson={deletePerson} />
     )}
     </div>
 

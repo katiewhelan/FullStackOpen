@@ -7,6 +7,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+# Using the WeatherStack API with this App
+To start using [WeatherStack] (https://weatherstack.com/) go to the site and get a free api key.  Instead of running `npm start` run `REACT_APP_WEATHER_API_KEY= npm start` placing your api key after = with no quotes
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

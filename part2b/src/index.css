@@ -1,0 +1,29 @@
+.person {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 22px;
+}
+
+button {
+  margin-left: 30px
+}
+
+.saveMessage {
+  color: green;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px
+}
+
+  .errorMessage {
+    color: red;
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px
+  }

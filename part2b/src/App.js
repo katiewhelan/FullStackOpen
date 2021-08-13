@@ -12,16 +12,15 @@ const App = () => {
   const [ searchList, setSearchList ] = useState(persons)
 
   useEffect(() => {
-    console.log("Effect")
+
     personService
     .getAll()
     .then(response => {
-      console.log("Promise fulfilled", response)
       setPersons(response)
       setSearchList(response)
     })
   }, [])
-  console.log("render", persons.length, 'persons')
+
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -40,8 +39,6 @@ const App = () => {
   }
 
   const deletePerson = (person) => {
-
-    console.log('in the delete ', person)
     const result = window.confirm(`Are you sure you want to delete ${person.name}`)
 
     if(result){
@@ -52,22 +49,32 @@ const App = () => {
         setSearchList(searchList.filter(p => p.id !== person.id))
       )
     }
-
-  }
-
-  const isEqual = (first, second) => {
-      return JSON.stringify(first) === JSON.stringify(second);
   }
 
   const checkForSameName = (pO) => {
-    const resultIsEqual = persons.some(p => isEqual(p,pO));
-    if (resultIsEqual){
-      alert(`${newName} has already been added to the phonebook`)
+    const match = persons.filter(p => p.name === pO.name)
+    console.log('Filter match', match)
+
+    if (match.length === 1){
+      const changeNumber = window.confirm(`${newName} has already been added to the phonebook, replace the old number with a new one?`)
+
+      if(changeNumber){
+
+        console.log('person to update', pO , match)
+        personService
+        .update(match[0].id,pO)
+        .then(response => {
+          console.log('Here is the update', response)
+          setPersons(persons.map(person => person.id !== match[0].id ? person : response))
+          setSearchList(searchList.map(searchList => searchList.id !== match[0].id ? searchList : response))
+
+        })
+      }
     } else {
       personService
       .create(pO)
       .then(response => {
-        console.log('Here is the response', response)
+
         setPersons(persons.concat(response))
         setNewName('')
         setNewNumber('')

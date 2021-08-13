@@ -15,7 +15,7 @@ const App = () => {
   }
 
 const Results = ({searchResults}) => {
-  console.log('results',searchResults[0])
+
 
   if(searchResults.length === 1) {
     return (

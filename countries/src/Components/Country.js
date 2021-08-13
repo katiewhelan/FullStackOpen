@@ -6,18 +6,22 @@ const [weatherResults, setWeatherResults] = useState([])
 const weatherAPIKey = process.env.REACT_APP_WEATHER_API_KEY
 const [showWeather, setShowWeather] = useState(false)
 
-console.log('effect', {country})
+
   useEffect(() => {
     axios
     .get(`http://api.weatherstack.com/current?access_key=${weatherAPIKey}&query=${country.capital}&units=f`)
     .then(response=>{
-      setWeatherResults(response.data)
+      console.log('response from weather', response.data, response.data.success, response.status, response)
+      if(response.data.success === false){
 
-      if(response.status === 200){
+      } else {
         console.log("should show")
+        setWeatherResults(response.data)
         setShowWeather(true)
       }
-      console.log('response from weather', response)
+
+    }).catch(error => {
+      setShowWeather(false)
     })
   },[])
   return(
@@ -38,6 +42,7 @@ console.log('effect', {country})
             <div>Wind: {weatherResults.current.wind_speed}  mph {weatherResults.current.wind_dir}</div>
           </div> : null
         }
+        {!showWeather ? <div> There was an error getting weather information</div>: null}
         </div>
   )
 }
